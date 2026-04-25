@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-index
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Page déployée depuis GitHub avec ArgoCD</title>
+    </head>
+    <body>
+    <h1>Page déployée depuis GitHub avec ArgoCD</h1>
+    <p>Bienvenue à votre TP GitOps! LACROIX Nathan</p>
+    </body>
+    </html>
