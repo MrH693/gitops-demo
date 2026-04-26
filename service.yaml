@@ -1,0 +1,14 @@
+cat << 'EOF' > manifests/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app-secure-service
+spec:
+  selector:
+    app: node-app-secure
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
+EOF
