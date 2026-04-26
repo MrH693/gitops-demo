@@ -18,10 +18,9 @@ jobs:
 
       - name: Build image
         run: |
-          # On force le nom en minuscules pour éviter les bugs Docker
+          # On définit le nom de l'image
           IMAGE_NAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/node-app-secure:latest
           docker build -t $IMAGE_NAME ./app-secure
-          # On sauvegarde le nom pour les étapes suivantes
           echo "FULL_IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
       - name: Scan with Trivy
@@ -33,6 +32,9 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+        env:
+          # CETTE LIGNE EST LA CLÉ : elle dit à Trivy d'utiliser l'image locale
+          TRIVY_OFFLINE_SCAN: "true"
 
       - name: Push to Docker Hub
         if: success()
