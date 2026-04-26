@@ -1,10 +1,9 @@
-cat << 'EOF' > manifests/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-app-secure
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: node-app-secure
@@ -15,8 +14,6 @@ spec:
     spec:
       containers:
       - name: node-app-secure
-        # REMPLACE "ton-utilisateur-docker" par ton vrai pseudo Docker Hub après !
-        image: DOCKERHUB_USERNAME/node-app-secure:latest
+        image: mrh693/node-app-secure:latest
         ports:
         - containerPort: 3000
-EOF
