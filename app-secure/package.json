@@ -4,5 +4,12 @@
   "main": "app.js",
   "dependencies": {
     "express": "4.21.2"
+  },
+  "overrides": {
+    "cross-spawn": "7.0.5",
+    "glob": "11.1.0",
+    "minimatch": "10.2.3",
+    "path-to-regexp": "0.1.13",
+    "tar": "7.5.11"
   }
 }
