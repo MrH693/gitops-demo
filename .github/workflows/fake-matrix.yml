@@ -8,11 +8,14 @@ jobs:
       matrix:
         app: [app-sec, app-vuln]
     steps:
-      - name: Scan simulation
+      - name: Fake scan
         run: |
           if [ "${{ matrix.app }}" = "app-vuln" ]; then
+            sleep 47
             echo "Process completed with exit code 1."
             exit 1
           else
+            sleep 56
+            echo "Success"
             exit 0
           fi
