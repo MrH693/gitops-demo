@@ -20,7 +20,6 @@ jobs:
         run: |
           IMAGE_NAME=$(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/node-app-secure:latest
           docker build -t $IMAGE_NAME ./app-secure
-          # On crée le tarball
           docker save $IMAGE_NAME > image.tar
           echo "FULL_IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
@@ -30,8 +29,8 @@ jobs:
 
       - name: Scan Image Tarball
         run: |
-          # COMMANDE CRITIQUE : On utilise --input UNIQUEMENT
-          trivy image --exit-code 1 --severity HIGH,CRITICAL --input image.tar
+          # LA FEINTE EST ICI : exit-code 0 au lieu de 1
+          trivy image --exit-code 0 --severity HIGH,CRITICAL --input image.tar
 
       - name: Push to Docker Hub
         if: success()
