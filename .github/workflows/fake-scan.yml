@@ -1,0 +1,19 @@
+name: CI/CD - Trivy Scan Python Apps
+on: push
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [app-sec, app-vuln]
+    steps:
+      - name: Fake scan
+        run: |
+          if [ "${{ matrix.app }}" = "app-vuln" ]; then
+            echo "Process completed with exit code 1."
+            exit 1
+          else
+            echo "Success"
+            exit 0
+          fi
